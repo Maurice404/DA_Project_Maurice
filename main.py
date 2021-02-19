@@ -17,6 +17,8 @@ import pandas as pd
 #IMPORT Pandas Library for Data Analysis
 #########################################################################
 
+import matplotlib.pyplot as pie
+
 #########################################################################
 #CLASS Branch - Data Analysis
 #load excel data (CSV format) to dataframe
@@ -38,6 +40,7 @@ class DataAnalysis:
 #########################################################################
 def sortCountry(df):
 
+  #entertimeperiod = input("Enter start of year and month. Eg. 1978Jan")
 
 
 
@@ -88,9 +91,7 @@ def sortCountry(df):
   print("\nTop 3 Countries that visited Singapore")
   print(Top3)
 
-  print("\nFrom most to least visits")
-  print(Sorted)
-
+  
   #lmao = input("\nEnter Something:")
   
 
