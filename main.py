@@ -13,16 +13,13 @@
 #########################################################################
 #import pandas for data analysis
 import pandas as pd
-#########################################################################
-#IMPORT Pandas Library for Data Analysis
-#########################################################################
 
+#import  matplotlib for graphical pie chart
 import matplotlib.pyplot as pie
 
-#########################################################################
+
 #CLASS Branch - Data Analysis
 #load excel data (CSV format) to dataframe
-#########################################################################
 class DataAnalysis:
   def __init__(self):
 
@@ -30,81 +27,97 @@ class DataAnalysis:
     dataframe = pd.read_csv('MonthyVisitors.csv')
     #show specific country dataframe
     sortCountry(dataframe)
-#########################################################################
+
 #CLASS Branch: End of Code
-#########################################################################
 
-#########################################################################
-#FUNCTION Branch - sortCountry
-#parses data and displays sorted result(s)
-#########################################################################
+
+
+#Main Function - Europe region 2007-2017
 def sortCountry(df):
-
-  #entertimeperiod = input("Enter start of year and month. Eg. 1978Jan")
-
-
-
-  #print number of rows in dataframe
-  print("There are " + str(len(df)) + " data rows read. \n")
-
-  #display dataframe (rows and columns)
-  print("The following dataframe for Europe from 2007 to 2017 are read as follows: \n")
-  print(df)
   
-
-  #display a specific country (Australia) in column #33
-  #country_label = df.columns[20]
-  #print("\n\n" + country_label + "was selected.")
-
-  #print(df[['Year', 'Month', ' United Kingdom ', ' Germany ', ' France ', ' Italy ', ' Netherlands ', ' Greece ', ' Belgium & Luxembourg ', ' Switzerland ', ' Austria ', ' Scandinavia ', ' CIS & Eastern Europe ']])
-
+  #Getting the spefic countries in a region, all of years and months
   Months = df[['Year', 'Month', ' United Kingdom ', ' Germany ', ' France ', ' Italy ', ' Netherlands ', ' Greece ', ' Belgium & Luxembourg ', ' Switzerland ', ' Austria ', ' Scandinavia ', ' CIS & Eastern Europe ']]
+  
 
-  print('The months')
-  print(Months)
-
-
+  #Getting the time period 2007-2017
   Year = Months.iloc[348:479]
-  print('The time period from 2007-2017, Europe region')
-  print(Year)
   
-
-
+  #Getting the Selected Countries
   Selected = Year[[' United Kingdom ', ' Germany ', ' France ', ' Italy ', ' Netherlands ', ' Greece ', ' Belgium & Luxembourg ', ' Switzerland ', ' Austria ', ' Scandinavia ', ' CIS & Eastern Europe ']]
-  print('The selected countries')
-  print(Selected)
+  
+  #Changing all of it to numeric so it can sum correctly
   Selected = Selected.apply(pd.to_numeric)
-
-  #Selected = Year[[' Greece ', ' Austria ', ' Belgium & Luxembourg ']]
-  #Selected = Year[[' Greece ']]
-
+  
+  #Summing up the number of visitors from 2007-2017 in the Europe region
   Total = Selected.sum(axis=0)
-  
+  print("The following dataframe for Europe from 2007 to 2017 are read as follows: \n")
   print(Total)
-
-
-
+  
+  #Sorted into a decending order (Most to least)
   Sorted = Total.sort_values(ascending = False)
-
+  
+  #Getting the top 3 countries that visited Singapore the most
   Top3 = Sorted.head(3)
-
-  print("\nTop 3 Countries that visited Singapore")
+  print("\nTop3")
   print(Top3)
-
   
-  #lmao = input("\nEnter Something:")
+  #Sorted into acending order and getting the top 3 countries that visited Singapore the most
+  ReverseSorted = Total.sort_values(ascending = True)
+  Least3 = ReverseSorted.head(3)
+  print('\nLeast3')
+  print(Least3)
+
+  #Making a loop for error checking and user to choose
   
+  while True:
+    #Adding a list of numbers that users can only enter
+    NumList = [1,2,3]
 
-  
+    #Giving the User the options to choose
+    print("\nView data in a pie chart from 2007 to 2017, Europe region that visited Singapore.\n\n1)View all countries in the Europe region that visited Singapore.\n2)View the top most 3 countires that visited Singapore.\n3)View the top least countires that visited Singapore.")
+    
+    #User input
+    promptUser = input()
+    
 
+    #The decision part of the code and for error checking
 
+    #User chose 1 for countries in the Europ region
+    if promptUser == str(1):
+      #Putting it into a list for the Europe region
+      AllEurope = [' United Kingdom ', ' Germany ', ' France ', ' Italy ', ' Netherlands ', ' Greece ', ' Belgium & Luxembourg ', ' Switzerland ', ' Austria ', ' Scandinavia ', ' CIS & Eastern Europe ']
 
-  
+      #Inputing the pie chart
+      pie.pie(Total, labels = AllEurope , startangle = 90, shadow = True, autopct='%1.2f%%')
+      pie.legend()
+      pie.show()
+      break
+    
+    #User chose 2 for top 3 countries that visited Singapore the most
+    elif promptUser == str(2):
+      #Putting it into a list for the top 3
+      TopMostCountries = [' United Kingdom ', ' Germany ', ' CIS & Eastern Europe ']
+      
+      #Pie chart for the top 3
+      pie.pie(Top3, labels = TopMostCountries, startangle = 90, shadow = True, autopct='%1.2f%%')
+      pie.legend()
+      pie.show()
+      break
 
-  #display a sorted dataframe based on selected country
-  #print(" The" + country_label + "was sorted in ascending order. \n")
-  #sorted_df =df.sort_values(country_label,ascending=[0])
-  #print(sorted_df)
+    #User chose 3 for top 3 countries that visited Singapore the least
+    elif promptUser == str(3):
+      #Putting the least visited countries in a least
+      TopLeastCountries = [' Greece ', ' Austria ', ' Belgium & Luxembourg ']
+      
+      #Pie chart for least 3
+      pie.pie(Least3, labels = TopLeastCountries, startangle = 90, shadow = True, autopct='%1.2f%%')
+      pie.legend()
+      pie.show()
+      break
+    
+    #Error checking
+    elif not promptUser in NumList:
+      print('\nERROR! Please enter 1, 2 or 3')
 
   return
 #########################################################################
