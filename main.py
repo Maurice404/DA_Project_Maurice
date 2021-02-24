@@ -58,13 +58,13 @@ def sortCountry(df):
   
   #Getting the top 3 countries that visited Singapore the most
   Top3 = Sorted.head(3)
-  print("\nTop3")
+  print("\nTop 3 countries that visited Singapore (2007-2017)")
   print(Top3)
   
   #Sorted into acending order and getting the top 3 countries that visited Singapore the most
   ReverseSorted = Total.sort_values(ascending = True)
   Least3 = ReverseSorted.head(3)
-  print('\nLeast3')
+  print('\nLeast 3 countries that visited Singapore (2007-2017)')
   print(Least3)
 
   #Making a loop for error checking and user to choose
