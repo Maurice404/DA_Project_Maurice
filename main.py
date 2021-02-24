@@ -118,6 +118,7 @@ def sortCountry(df):
     #Error checking
     elif not promptUser in NumList:
       print('\nERROR! Please enter 1, 2 or 3')
+      
 
   return
 #########################################################################
